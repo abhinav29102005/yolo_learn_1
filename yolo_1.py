@@ -2,27 +2,27 @@ import cv2
 from ultralytics import YOLO
 def naach_chamiya():
     in_pass = 'image.png'
-    out_pass = 'image.png'
+    out_pass = 'result_image.png'
     chamiya_ka_naam = 'yolov8n.pt'  
-    print(f"Loading YOLO model: {chamiya_ka_naam}...")
+    print(f"loading yolov8{chamiya_ka_naam}...")
     try:
         model = YOLO(chamiya_ka_naam)
-        print(f"Attempting to read image from: {in_pass}")
+        print(f"img_read started{in_pass}")
         image = cv2.imread(in_pass)
         if image is None:
-            print(f"ERROR: Could not load image at path: {in_pass}")
-            print("Please ensure the image file exists and the path is correct.")
+            print(f"error img_path:{in_pass}")
+            print("img input error")
             return
         print("Running inference...")
         results = model(image, conf=0.25)
         result = results[0]
         annotated_image = result.plot()
         cv2.imwrite(out_pass, annotated_image)
-        print(f"Detection successful! Result saved to {out_pass}")
-        cv2.imshow("YOLOv8 Detection Result", annotated_image)
+        print(f"detection successful_Result saved to {out_pass}")
+        cv2.imshow("result of yolov8 out", annotated_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-        print("Display window closed.")
+        print("dhwar baand")
     except Exception as e:
         print(f"\nerror aala:")
         print(f"Error details: {e}")
